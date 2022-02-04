@@ -5,10 +5,11 @@ interface Props {
   pokemonList: PokemonList;
   selectedPokemon: PokemonListItem;
   setSelectedPokemon: Dispatch<SetStateAction<PokemonListItem | undefined>>;
+  favoritePokemonName: string;
 }
 
 const PokemonListComponent: FC<Props> = (props: Props) => {
-  const { pokemonList, selectedPokemon, setSelectedPokemon } = props;
+  const { pokemonList, selectedPokemon, setSelectedPokemon, favoritePokemonName } = props;
 
   return (
     <ul className="pokemon-list">
@@ -16,7 +17,9 @@ const PokemonListComponent: FC<Props> = (props: Props) => {
         return (
           <li key={i}>
             <button
-              className={`pokemon-list__button ${pokemon === selectedPokemon ? 'pokemon-list__button--selected' : ''}`}
+              className={`pokemon-list__button ${pokemon === selectedPokemon ? 'pokemon-list__button--selected' : ''} ${
+                pokemon.name === favoritePokemonName ? 'pokemon-list__button--favorite' : ''
+              }`}
               onClick={() => setSelectedPokemon(pokemon)}
               type="button"
             >

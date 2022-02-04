@@ -8,8 +8,10 @@ import { createContext, useEffect, useState } from 'react';
 import type { NextPage } from 'next';
 const Home: NextPage = () => {
   const [pokemonList, setPokemonList] = useState<PokemonList>();
-  const [status, setStatus] = useState<'idle' | 'pending' | 'resolved' | 'rejected'>('idle');
   const [selectedPokemon, setSelectedPokemon] = useState<PokemonListItem>();
+  const [favoritePokemonName, setFavoritePokemonName] = useState<string>('');
+
+  const [status, setStatus] = useState<'idle' | 'pending' | 'resolved' | 'rejected'>('idle');
 
   useEffect(() => {
     fetchPokemon();
@@ -51,8 +53,13 @@ const Home: NextPage = () => {
               pokemonList={pokemonList!}
               selectedPokemon={selectedPokemon!}
               setSelectedPokemon={setSelectedPokemon}
+              favoritePokemonName={favoritePokemonName}
             ></PokemonListComponent>
-            <PokemonDetailComponent selectedPokemon={selectedPokemon!}></PokemonDetailComponent>
+            <PokemonDetailComponent
+              selectedPokemon={selectedPokemon!}
+              favoritePokemonName={favoritePokemonName!}
+              setFavoritePokemonName={setFavoritePokemonName}
+            ></PokemonDetailComponent>
           </div>
         )}
 

@@ -4,10 +4,12 @@ import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 
 interface Props {
   selectedPokemon: PokemonListItem;
+  favoritePokemonName: string;
+  setFavoritePokemonName: Dispatch<SetStateAction<string>>;
 }
 
 const PokemonDetailComponent: FC<Props> = (props: Props) => {
-  const { selectedPokemon } = props;
+  const { selectedPokemon, favoritePokemonName, setFavoritePokemonName } = props;
 
   const [pokemonDetails, setPokemonDetails] = useState<PokemonDetail>();
   const [status, setStatus] = useState<'idle' | 'pending' | 'resolved' | 'rejected'>('idle');
@@ -38,6 +40,20 @@ const PokemonDetailComponent: FC<Props> = (props: Props) => {
     <div className="pokemon-details-card">
       {status === 'resolved' && (
         <div className="pokemon-details">
+          <div className="pokemon-details__favorite">
+            {favoritePokemonName !== pokemonDetails?.name && (
+              <button
+                type="button"
+                className="pokemon-details__favorite__button"
+                onClick={() => setFavoritePokemonName(pokemonDetails?.name!)}
+              >
+                Mark as favorite
+              </button>
+            )}
+
+            {favoritePokemonName === pokemonDetails?.name && <p>This is your favorite pokemon</p>}
+          </div>
+
           <div className="pokemon-details__info">
             <div className="pokemon-details__image">
               <img src={pokemonDetails?.sprites.front_default}></img>
