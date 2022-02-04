@@ -1,3 +1,4 @@
+import LoadingSpinnerComponent from '../components/loading-spinner';
 import PokemonDetailComponent from '../components/pokemon-detail';
 import PokemonListComponent from '../components/pokemon-list';
 import { PokemonList, PokemonListItem } from '../shared/entities/pokemon.entity';
@@ -16,6 +17,10 @@ const Home: NextPage = () => {
   useEffect(() => {
     fetchPokemon();
   }, []);
+
+  useEffect(() => {
+    syncFavoritePokemonWithLocalStorage();
+  }, [favoritePokemonName]);
 
   function fetchPokemon(): void {
     setStatus('pending');
@@ -36,6 +41,16 @@ const Home: NextPage = () => {
     setStatus('rejected');
   }
 
+  function syncFavoritePokemonWithLocalStorage(): void {
+    const localStorageValue = window.localStorage.getItem('favorite-pokemon');
+
+    if (!favoritePokemonName && localStorageValue) {
+      setFavoritePokemonName(localStorageValue);
+    } else {
+      window.localStorage.setItem('favorite-pokemon', favoritePokemonName);
+    }
+  }
+
   return (
     <div>
       <Head>
@@ -45,7 +60,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        {status === 'pending' && <p>Loading</p>}
+        {status === 'pending' && <LoadingSpinnerComponent></LoadingSpinnerComponent>}
 
         {status === 'resolved' && (
           <div className="pokemon-container">
@@ -63,7 +78,12 @@ const Home: NextPage = () => {
           </div>
         )}
 
-        {status === 'rejected' && <p>Error</p>}
+        {status === 'rejected' && (
+          <div>
+            <h2>Failed to fetch pokemon data</h2>
+            <p>Please try again later</p>
+          </div>
+        )}
       </main>
     </div>
   );

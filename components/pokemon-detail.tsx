@@ -1,5 +1,6 @@
 import { Move, PokemonDetail, PokemonListItem } from '../shared/entities/pokemon.entity';
 import { pokemonService } from '../shared/services/pokemon.service';
+import LoadingSpinnerComponent from './loading-spinner';
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 
 interface Props {
@@ -38,6 +39,8 @@ const PokemonDetailComponent: FC<Props> = (props: Props) => {
 
   return (
     <div className="pokemon-details-card">
+      {status === 'pending' && <LoadingSpinnerComponent></LoadingSpinnerComponent>}
+
       {status === 'resolved' && (
         <div className="pokemon-details">
           <div className="pokemon-details__favorite">
@@ -80,6 +83,13 @@ const PokemonDetailComponent: FC<Props> = (props: Props) => {
               })}
             </ul>
           </div>
+        </div>
+      )}
+
+      {status === 'rejected' && (
+        <div>
+          <h2>Failed to fetch details for {selectedPokemon.name}</h2>
+          <p>Please try again later</p>
         </div>
       )}
     </div>
