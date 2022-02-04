@@ -4,7 +4,7 @@ import PokemonListComponent from '../components/pokemon-list';
 import { PokemonList, PokemonListItem } from '../shared/entities/pokemon.entity';
 import { pokemonService } from '../shared/services/pokemon.service';
 import Head from 'next/head';
-import { createContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import type { NextPage } from 'next';
 const Home: NextPage = () => {
