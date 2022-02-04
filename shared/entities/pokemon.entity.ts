@@ -18,6 +18,7 @@ export interface PokemonDetail {
   moves: Move[];
   sprites: {
     front_default: string;
+    back_default: string;
   };
 }
 

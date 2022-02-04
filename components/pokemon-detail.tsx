@@ -1,6 +1,7 @@
 import { Move, PokemonDetail, PokemonListItem } from '../shared/entities/pokemon.entity';
 import { pokemonService } from '../shared/services/pokemon.service';
 import LoadingSpinnerComponent from './loading-spinner';
+import Image from 'next/image';
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 
 interface Props {
@@ -13,6 +14,7 @@ const PokemonDetailComponent: FC<Props> = (props: Props) => {
   const { selectedPokemon, favoritePokemonName, setFavoritePokemonName } = props;
 
   const [pokemonDetails, setPokemonDetails] = useState<PokemonDetail>();
+  const [showBack, setShowBack] = useState<boolean>(false);
   const [status, setStatus] = useState<'idle' | 'pending' | 'resolved' | 'rejected'>('idle');
 
   useEffect(() => {
@@ -21,6 +23,7 @@ const PokemonDetailComponent: FC<Props> = (props: Props) => {
 
   function fetchPokemonDetails(): void {
     setStatus('pending');
+    setShowBack(false);
 
     pokemonService
       .getByName(selectedPokemon.name)
@@ -35,6 +38,10 @@ const PokemonDetailComponent: FC<Props> = (props: Props) => {
 
   function fetchPokemonDetailsFailed(): void {
     setStatus('rejected');
+  }
+
+  function toggleShowBack(): void {
+    setShowBack(!showBack);
   }
 
   return (
@@ -59,7 +66,10 @@ const PokemonDetailComponent: FC<Props> = (props: Props) => {
 
           <div className="pokemon-details__info">
             <div className="pokemon-details__image">
-              <img src={pokemonDetails?.sprites.front_default}></img>
+              <img src={showBack ? pokemonDetails?.sprites.back_default : pokemonDetails?.sprites.front_default}></img>
+              <button className="pokemon-details__image__swap-button" type="button" onClick={() => toggleShowBack()}>
+                <Image src="/repeat.svg" width="10" height="10"></Image>
+              </button>
             </div>
             <p>
               <strong>

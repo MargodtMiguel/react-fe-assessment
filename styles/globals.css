@@ -158,6 +158,27 @@ a {
 .pokemon-details__image{
   width:8rem;
   height:8rem;
+
+  position:relative
+}
+
+.pokemon-details__image__swap-button{
+  position: absolute;
+  bottom:.5rem;
+  right:-.5rem;
+
+  padding:0;
+
+  width:1.5rem;
+  height:1.5rem;
+
+  background:none;
+  border:1px solid lightgray;
+  border-radius:100%;
+}
+
+.pokemon-details__image__swap-button:hover{
+  cursor: pointer;
 }
 
 .pokemon-details__image > img{
