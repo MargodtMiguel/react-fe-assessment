@@ -63,21 +63,37 @@ a {
 
 .pokemon-container{
   display: grid;
-  grid-template-columns: 10rem auto;
-  grid-column-gap: 1rem;
+
+  grid-template-rows: 4rem auto;
+  grid-row-gap: 1rem;
 
   padding:1rem;
 
   max-height: calc(100vh - 2rem);
   overflow:hidden;
-
 }
+
 
 .pokemon-list{
   list-style: none;
   padding-bottom:1rem;
   max-height: inherit;
   overflow:auto;
+
+  display:flex;
+}
+
+@media screen and (min-width: 480px) {
+  .pokemon-container{
+    grid-template-columns: 10rem auto;
+    grid-column-gap: 1rem;
+
+    grid-template-rows: none;
+  }
+
+  .pokemon-list{
+    flex-direction: column;
+  }
 }
 
 .pokemon-list__button{
