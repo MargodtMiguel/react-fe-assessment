@@ -1,22 +1,6 @@
-# Pokemon Front-End Assignment
 
-You will be working with a public Pokémon API. You will create a small web application with some basic styling that fetches a list of Pokémons. From this list, you can select a Pokémon and view the Pokémon in detail. You can also mark a Pokémon as your favorite. This "marking action" will only happen locally, so there will be no API call to actually put this change into a database. As a final touch, think about some extra functionality you could add to this application, try to impress us!
 
-This assignment will give us insights in how well you can create a Front-End application for a Back-End. There are 7 important points where we will rate your code on:
-
-- Using best practices
-- Code structure
-- Code readability
-- State management
-- Type usage (do not use the [any](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any) type)
-- Basic styling
-- Usage of git
-
-Here is how the app can look like once the assignment is finished. You don't have to make it look exactly the same. It also doesn't have to be super fancy, but some basic styling to make it easier on the eye is required.
-
-![Pokemon app](assignment_images/pokemon_app.png)
-
-### Working out the assignment
+### The assignment
 
 #### Task 1: Pokémon list
 
